@@ -1,0 +1,14 @@
+# Netlify deploys this folder as-is. No build step: it's a plain HTML/CSS/JS site.
+[build]
+  publish = "."
+  command = ""
+
+# Cache images, video and fonts for a long time; HTML stays fresh so updates show immediately.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/thumbs/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

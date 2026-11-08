@@ -1,0 +1,12 @@
+Shaykat Portfolio — updated build
+
+Changes in this build:
+- Added Hoomanely as the second UI/UX project after OMAF Water ERP.
+- Added a native in-site Hoomanely case-study viewer with all 19 slides rendered from the supplied case-study PDF, lazy loading, enlarged-slide lightbox, and Behance link.
+- Updated the resume PDF used by the nav, About section and contact overlay.
+- Fixed the scroll hijack: scrolling no longer forces the page to jump to “02 / A LITTLE ABOUT ME”. Navigation reveals naturally; the explicit “Show more” button still scrolls to About.
+
+Deploy the contents of this ZIP to the existing Netlify site, replacing the previous deployed files.
+
+
+Portfolio update (2026-10-28): Added Hoomanely case-study video with poster thumbnail, refreshed resume PDF, restored VIXII email/invite image assets, and added animated tools ticker immediately after the hero.
