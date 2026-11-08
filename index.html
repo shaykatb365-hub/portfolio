@@ -242,6 +242,35 @@
           <button class="social-link resume-social" id="certsTriggerContact" aria-label="View experience certificates"><span class="resume-mini-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13.5 7.5 21l4.5-2.5 4.5 2.5-1.5-7.5"/></svg></span><span>View certs</span></button>
         </div>
       </div>
+
+      <form class="contact-form" id="contactForm" name="contact" method="POST" action="/?sent=1#contact" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="ref" id="contactRef" value="">
+        <p class="contact-form-hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+        <div class="contact-form-head">
+          <p class="eyebrow">OR DROP A MESSAGE HERE</p>
+          <p class="contact-form-note">I usually reply within a day.</p>
+        </div>
+        <div class="contact-form-grid">
+          <label><span>Name</span><input name="name" autocomplete="name" required maxlength="120"></label>
+          <label><span>Email</span><input type="email" name="email" autocomplete="email" required maxlength="160"></label>
+          <label><span>Company <small>(optional)</small></span><input name="company" autocomplete="organization" maxlength="120"></label>
+          <label><span>What's it about? <small>(optional)</small></span>
+            <select name="topic">
+              <option value="">Choose one</option>
+              <option>Full-time role</option>
+              <option>Freelance project</option>
+              <option>Collaboration</option>
+              <option>Just saying hi</option>
+            </select>
+          </label>
+          <label class="contact-form-wide"><span>Message</span><textarea name="message" rows="5" required maxlength="4000"></textarea></label>
+        </div>
+        <div class="contact-form-foot">
+          <button type="submit" class="contact-form-send" id="contactSend">Send message</button>
+          <p class="contact-form-status" id="contactStatus" role="status" aria-live="polite"></p>
+        </div>
+      </form>
     </section>
   </main>
 </div>
@@ -309,5 +338,7 @@
 </div>
 
 <script src="script.js"></script>
+<script src="track.js"></script>
+<script src="contact.js"></script>
 </body>
 </html>
