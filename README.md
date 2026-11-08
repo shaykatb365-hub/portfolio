@@ -23,6 +23,19 @@ Netlify also builds a preview link for every pull request, so you can check a ch
 
 Keep single files under 100 MB (GitHub's limit); compress large videos before adding them.
 
+## Visitor insights
+
+- `track.js` reports what visitors do (case studies opened, scroll/slide/video progress,
+  resume and certificate opens/downloads, Behance/LinkedIn/email clicks) to
+  `netlify/functions/track.mjs`, which stores events in Netlify Blobs. No cookies or IPs.
+- `contact.js` + the form in `index.html` use Netlify Forms (Netlify → Forms → contact).
+- `stats.html` is a private dashboard backed by `netlify/functions/stats.mjs`.
+  It needs a `STATS_KEY` environment variable in Netlify; enter the same value on the page.
+- **Application links:** share `https://shaykat-portfolio-2026.netlify.app/?ref=company-name`.
+  Everything that visitor does is tagged with `company-name` for 30 days.
+- **Don't count yourself:** open the site once with `?notrack=1` in each browser you use.
+- Deploy previews write to a separate store, so testing never mixes with real numbers.
+
 ## History
 
 See `CHANGELOG.txt`.

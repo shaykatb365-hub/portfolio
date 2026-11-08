@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Portfolio stats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0d;--surface:#151515;--surface2:#1b1b1b;--text:#f1eee8;--muted:rgba(241,238,232,.64);--faint:rgba(241,238,232,.38);--line:rgba(241,238,232,.11);--orange:#f88400;--orange-soft:rgba(248,132,0,.14);--ok:#7fd18b;--sans:'DM Sans',sans-serif;--display:'Montserrat',sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--orange)}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 16px 80px}
+@media(min-width:700px){.wrap{padding:56px 32px 100px}}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--orange);margin:0 0 10px;font-weight:600}
+h1{font-family:var(--display);font-size:clamp(32px,5vw,52px);letter-spacing:-.04em;margin:0;line-height:1}
+h2{font-family:var(--display);font-size:20px;letter-spacing:-.02em;margin:0 0 4px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 16px}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px}
+.seg button{font:inherit;font-size:13px;color:var(--muted);background:none;border:0;border-radius:999px;padding:7px 13px;cursor:pointer}
+.seg button.on{background:var(--orange);color:#0d0d0d;font-weight:600}
+.btn{font:inherit;font-size:13px;color:var(--text);background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.btn.primary{background:var(--orange);color:#0d0d0d;border-color:var(--orange);font-weight:600}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;min-width:0}
+.grid{display:grid;gap:14px}
+.kpis{grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-bottom:14px}
+.kpi .v{font-family:var(--display);font-size:34px;letter-spacing:-.03em;margin-top:6px}
+.kpi .l{color:var(--muted);font-size:13px}
+.two{grid-template-columns:1fr;margin-bottom:14px}
+@media(min-width:900px){.two{grid-template-columns:1fr 1fr}}
+.full{margin-bottom:14px}
+.bars{display:flex;align-items:flex-end;gap:3px;height:140px;margin-top:14px}
+.bars div{flex:1;background:var(--orange-soft);border-top:2px solid var(--orange);border-radius:3px 3px 0 0;min-height:2px;position:relative}
+.bars div:hover{background:rgba(248,132,0,.3)}
+.bars-x{display:flex;justify-content:space-between;color:var(--faint);font-size:11px;margin-top:6px}
+.table-wrap{overflow-x:auto;margin:0 -4px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:500;color:var(--faint);font-size:12px;padding:8px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.meter{height:6px;border-radius:6px;background:var(--surface2);overflow:hidden;margin-top:5px;min-width:60px}
+.meter i{display:block;height:100%;background:var(--orange)}
+.list{list-style:none;margin:10px 0 0;padding:0}
+.list li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list li:last-child{border-bottom:0}
+.list li span:last-child{color:var(--muted);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;font-size:11px;padding:3px 8px;border-radius:999px;background:var(--surface2);color:var(--muted);margin:2px 4px 2px 0}
+.pill.hot{background:var(--orange-soft);color:var(--orange)}
+.pill.ok{background:rgba(127,209,139,.12);color:var(--ok)}
+.empty{color:var(--faint);font-size:14px;padding:14px 0}
+.builder{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.builder input{flex:1 1 200px;font:inherit;font-size:14px;color:var(--text);background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;outline:none}
+.builder input:focus{border-color:var(--orange)}
+.link-out{margin-top:10px;font-size:13px;color:var(--muted);word-break:break-all}
+.feed{max-height:420px;overflow:auto}
+.feed li{justify-content:flex-start;gap:14px}
+.feed time{color:var(--faint);font-size:12px;min-width:92px;font-variant-numeric:tabular-nums}
+.gate{max-width:420px;margin:12vh auto 0;text-align:center}
+.gate p{color:var(--muted);font-size:14px;line-height:1.6}
+.gate form{display:flex;gap:8px;margin-top:18px}
+.gate input{flex:1;font:inherit;color:var(--text);background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:11px 14px;outline:none}
+.err{color:#ff8a7a;font-size:14px;margin-top:12px}
+.note{font-size:13px;color:var(--muted);line-height:1.6}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="gate" id="gate">
+    <p class="eyebrow">PRIVATE</p>
+    <h1>Portfolio stats</h1>
+    <p>Enter your stats key. It's the <code>STATS_KEY</code> value you set in Netlify's environment variables.</p>
+    <form id="gateForm"><input id="keyInput" type="password" placeholder="Stats key" autocomplete="current-password" required><button class="btn primary">Open</button></form>
+    <p class="err" id="gateErr" hidden></p>
+  </section>
+
+  <main id="app" hidden>
+    <header>
+      <div><p class="eyebrow">PRIVATE · NOT LINKED FROM THE SITE</p><h1>Who's looking at your work</h1></div>
+      <div class="controls">
+        <div class="seg" id="range"><button data-d="7">7 days</button><button data-d="30" class="on">30 days</button><button data-d="90">90 days</button></div>
+        <button class="btn" id="refresh">Refresh</button>
+        <button class="btn" id="logout">Lock</button>
+      </div>
+    </header>
+
+    <div class="grid kpis" id="kpis"></div>
+
+    <div class="card full">
+      <h2>Visitors per day</h2>
+      <div class="bars" id="bars"></div>
+      <div class="bars-x" id="barsX"></div>
+    </div>
+
+    <div class="card full">
+      <h2>Case studies</h2>
+      <p class="sub">Which projects get opened, how long people stay, and how far they get.</p>
+      <div class="table-wrap"><table id="projects"></table></div>
+    </div>
+
+    <div class="card full">
+      <h2>Application links</h2>
+      <p class="sub">Send each company its own link. Everything that visitor does is tagged with the name for 30 days.</p>
+      <div class="builder"><input id="refName" placeholder="Company or job, e.g. asite-uiux" maxlength="60"><button class="btn primary" id="refMake">Copy link</button></div>
+      <p class="link-out" id="refOut"></p>
+      <div class="table-wrap" style="margin-top:12px"><table id="refs"></table></div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Actions</h2>
+        <p class="sub">Resume, certificates, contact and outbound clicks.</p>
+        <ul class="list" id="actions"></ul>
+      </div>
+      <div class="card">
+        <h2>Where visitors come from</h2>
+        <p class="sub">Referring sites, countries and devices.</p>
+        <ul class="list" id="sources"></ul>
+      </div>
+    </div>
+
+    <div class="grid two">
+      <div class="card">
+        <h2>Latest activity</h2>
+        <ul class="list feed" id="feed"></ul>
+      </div>
+      <div class="card">
+        <h2>Messages and notes</h2>
+        <p class="note">Contact form messages are stored in Netlify under <strong>Forms → contact</strong>, and emailed to you if form notifications are on. A message sent from an application link includes that link's name in its <em>ref</em> field.</p>
+        <p class="note">Your own visits: open the site once with <code>?notrack=1</code> in each browser you use, so you don't count yourself. <code>?notrack=0</code> turns it back on.</p>
+        <p class="note">No cookies, IP addresses or personal details are stored. Location is the country and city Netlify detects.</p>
+      </div>
+    </div>
+  </main>
+</div>
+<script>
+(function(){
+  const $=s=>document.querySelector(s);
+  const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ls={get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(k)}catch(e){}}};
+  let key=ls.get('pf_stats_key')||'';let days=30;let titles={};
+
+  // Project titles come straight from the site's own project list.
+  fetch('script.js').then(r=>r.text()).then(t=>{for(const m of t.matchAll(/\{id:'([^']+)',title:'([^']+)'/g))titles[m[1]]=m[2]}).catch(()=>{});
+  const title=id=>titles[id]||id;
+
+  const fmtSec=s=>{if(s==null)return'–';if(s<60)return s+'s';const m=Math.floor(s/60);return m<60?m+'m '+(s%60)+'s':Math.floor(m/60)+'h '+(m%60)+'m'};
+  const fmtTime=iso=>{const d=new Date(iso);return d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+' '+d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'})};
+  const ACTION_LABELS={resume_open:'Opened resume',resume_download:'Downloaded resume',certs_open:'Opened certificates',cert_download:'Downloaded a certificate',contact_sent:'Sent the contact form',share:'Copied a project link',category:'Switched category'};
+  const CLICK_LABELS={behance:'Clicked Behance',linkedin:'Clicked LinkedIn',email:'Clicked email'};
+
+  async function load(){
+    $('#refresh').textContent='Loading…';
+    try{
+      const res=await fetch('/.netlify/functions/stats?days='+days,{headers:{'x-stats-key':key}});
+      const data=await res.json().catch(()=>({error:'Unexpected response ('+res.status+')'}));
+      if(!res.ok){if(res.status===401){ls.del('pf_stats_key');showGate(data.error)}else showGate(data.error||'Could not load stats.');return}
+      ls.set('pf_stats_key',key);
+      $('#gate').hidden=true;$('#app').hidden=false;render(data);
+    }catch(e){showGate('Could not reach the stats function.')}
+    finally{$('#refresh').textContent='Refresh'}
+  }
+  function showGate(msg){$('#app').hidden=true;$('#gate').hidden=false;const e=$('#gateErr');e.hidden=!msg;e.textContent=msg||''}
+
+  function render(d){
+    const t=d.totals;
+    $('#kpis').innerHTML=[
+      ['Visitors',t.visitors],['Visits',t.sessions],['Avg. visit',fmtSec(t.avgSessionSeconds)],['Case studies opened',t.caseOpens],['Resume downloads',t.resumeDownloads]
+    ].map(([l,v])=>`<div class="card kpi"><div class="l">${l}</div><div class="v">${esc(v)}</div></div>`).join('');
+
+    // Daily bars, with empty days filled in
+    const map=Object.fromEntries(d.daily.map(x=>[x.day,x]));const daysArr=[];
+    for(let i=d.days-1;i>=0;i--){const k=new Date(Date.now()-i*864e5).toISOString().slice(0,10);daysArr.push({day:k,visitors:(map[k]||{}).visitors||0})}
+    const max=Math.max(1,...daysArr.map(x=>x.visitors));
+    $('#bars').innerHTML=daysArr.map(x=>`<div style="height:${Math.max(1.5,x.visitors/max*100)}%" title="${x.day}: ${x.visitors} visitor${x.visitors===1?'':'s'}"></div>`).join('');
+    $('#barsX').innerHTML=`<span>${daysArr[0].day}</span><span>peak ${max}/day</span><span>today</span>`;
+
+    // Projects
+    $('#projects').innerHTML=d.projects.length?`<thead><tr><th>Project</th><th class="n">Opens</th><th class="n">People</th><th class="n">Avg. time</th><th>How far they scrolled</th><th>Slides / video</th></tr></thead><tbody>${d.projects.map(p=>`<tr>
+      <td>${esc(title(p.id))}</td><td class="n">${p.opens}</td><td class="n">${p.visitors}</td><td class="n">${fmtSec(p.avgSeconds)}</td>
+      <td>${p.avgDepth==null?'–':p.avgDepth+'%'}<div class="meter"><i style="width:${p.avgDepth||0}%"></i></div></td>
+      <td>${p.avgSlidePct==null?'':`<span class="pill">avg. ${p.avgSlidePct}% of slides</span><span class="pill ${p.finishedSlides?'hot':''}">${p.finishedSlides} saw them all</span>`}${p.videoPlays?`<span class="pill">${p.videoPlays} played video</span><span class="pill">${p.videoFinished} watched to end</span>`:''}${p.avgSlidePct==null&&!p.videoPlays?'<span class="pill">–</span>':''}</td>
+    </tr>`).join('')}</tbody>`:'<tbody><tr><td class="empty">No case studies opened yet.</td></tr></tbody>';
+
+    // Refs
+    $('#refs').innerHTML=d.refs.length?`<thead><tr><th>Link</th><th>Last seen</th><th class="n">Visits</th><th class="n">Time</th><th>Looked at</th><th>Did</th></tr></thead><tbody>${d.refs.map(r=>`<tr>
+      <td><strong>${esc(r.ref)}</strong>${r.places.length?`<div class="sub" style="margin:2px 0 0">${esc(r.places.join(' · '))}</div>`:''}</td>
+      <td>${fmtTime(r.last)}</td><td class="n">${r.sessions}</td><td class="n">${fmtSec(r.seconds||null)}</td>
+      <td>${Object.entries(r.projects).map(([id,n])=>`<span class="pill">${esc(title(id))}${n>1?' ×'+n:''}</span>`).join('')||'<span class="pill">home page only</span>'}</td>
+      <td>${r.contacted?'<span class="pill ok">sent a message</span>':''}${r.resumeDownloaded?'<span class="pill hot">downloaded resume</span>':r.resumeOpened?'<span class="pill hot">opened resume</span>':''}${Object.keys(r.clicks).map(c=>`<span class="pill">${esc(c)}</span>`).join('')}</td>
+    </tr>`).join('')}</tbody>`:'<tbody><tr><td class="empty">No visits from application links yet.</td></tr></tbody>';
+
+    // Actions
+    const acts=[...Object.entries(d.actions).filter(([k])=>k!=='category').map(([k,v])=>[ACTION_LABELS[k]||k,v]),...Object.entries(d.clicks).map(([k,v])=>[CLICK_LABELS[k]||'Clicked '+k,v])].sort((a,b)=>b[1]-a[1]);
+    $('#actions').innerHTML=acts.length?acts.map(([l,v])=>`<li><span>${esc(l)}</span><span>${v}</span></li>`).join(''):'<li class="empty">Nothing yet.</li>';
+
+    // Sources
+    const top=(o,n=6)=>Object.entries(o).sort((a,b)=>b[1]-a[1]).slice(0,n);
+    const rows=[...top(d.referrers).map(([k,v])=>['↗ '+k,v]),...top(d.countries).map(([k,v])=>['⌖ '+k,v]),...top(d.devices,3).map(([k,v])=>['▭ '+k,v])];
+    $('#sources').innerHTML=rows.length?rows.map(([l,v])=>`<li><span>${esc(l)}</span><span>${v}</span></li>`).join(''):'<li class="empty">Nothing yet.</li>';
+
+    // Feed
+    const describe=e=>{
+      const who=e.ref?`<strong>${esc(e.ref)}</strong>`:'Someone';const where=[e.city,e.country].filter(Boolean).join(', ');
+      const p=e.project?esc(title(e.project)):'';
+      const what={pageview:`visited${e.referrer?' from '+esc(e.referrer):''}${e.firstVisit?' for the first time':''}`,case_open:`opened ${p}`,case_close:`left ${p} after ${fmtSec(e.seconds)}${e.slides?` (slide ${e.maxSlide}/${e.slides})`:e.depth?` (${e.depth}% down)`:''}`,video_play:`played the ${p} video`,resume_open:'opened your resume',resume_download:'downloaded your resume',certs_open:'opened your certificates',cert_download:'downloaded a certificate',contact_sent:'sent you a message',share:`copied the link to ${p}`,click:`clicked ${esc(e.detail)}${p?' from '+p:''}`,leave:`left after ${fmtSec(e.seconds)}`,category:`browsed ${esc(e.detail)}`}[e.type]||esc(e.type);
+      return `${who}${where?` <span style="color:var(--faint)">(${esc(where)})</span>`:''} ${what}`;
+    };
+    const feed=d.recent.filter(e=>e.type!=='category');
+    $('#feed').innerHTML=feed.length?feed.map(e=>`<li><time>${fmtTime(e.at)}</time><span>${describe(e)}</span></li>`).join(''):'<li class="empty">Nothing yet.</li>';
+  }
+
+  $('#gateForm').onsubmit=e=>{e.preventDefault();key=$('#keyInput').value.trim();load()};
+  $('#refresh').onclick=load;
+  $('#logout').onclick=()=>{ls.del('pf_stats_key');key='';showGate('')};
+  $('#range').onclick=e=>{const b=e.target.closest('button');if(!b)return;days=+b.dataset.d;[...$('#range').children].forEach(x=>x.classList.toggle('on',x===b));load()};
+  const slug=s=>s.toLowerCase().trim().replace(/[^a-z0-9._-]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60);
+  $('#refMake').onclick=async()=>{
+    const s=slug($('#refName').value);if(!s){$('#refName').focus();return}
+    const link=location.origin+'/?ref='+encodeURIComponent(s);
+    try{await navigator.clipboard.writeText(link);$('#refOut').textContent='Copied: '+link}catch(e){$('#refOut').textContent=link}
+  };
+  if(key)load();else showGate('');
+})();
+</script>
+</body>
+</html>

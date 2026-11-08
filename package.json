@@ -1,0 +1,9 @@
+{
+  "name": "shaykat-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Static portfolio site. Dependencies below are only for the Netlify Functions in netlify/functions.",
+  "dependencies": {
+    "@netlify/blobs": "11.1.6"
+  }
+}

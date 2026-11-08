@@ -1,9 +1,14 @@
-# Netlify deploys this folder as-is. No build step: it's a plain HTML/CSS/JS site.
+# Plain HTML/CSS/JS site: Netlify publishes this folder as-is (no build step).
+# The only server-side code is in netlify/functions (visitor tracking + private stats).
 [build]
   publish = "."
   command = ""
 
-# Cache images, video and fonts for a long time; HTML stays fresh so updates show immediately.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Cache images, video and fonts for a week; HTML stays fresh so updates show immediately.
 [[headers]]
   for = "/assets/*"
   [headers.values]
@@ -12,3 +17,10 @@
   for = "/thumbs/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Private stats page: never indexed, never cached.
+[[headers]]
+  for = "/stats.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"

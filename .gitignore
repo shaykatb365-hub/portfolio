@@ -1,6 +1,6 @@
+*.zip
 .DS_Store
+.netlify/
 Thumbs.db
 desktop.ini
-*.zip
 node_modules/
-.netlify/
