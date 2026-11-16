@@ -1,5 +1,5 @@
 // Page-view analytics with GoatCounter (free, no cookies, no consent banner needed).
-// Dashboard: https://<your-code>.goatcounter.com
+// Dashboard: https://shaykat.goatcounter.com
 //
 // Setup: put your GoatCounter site code below (the part before .goatcounter.com).
 // Until it is set, this file does nothing.
@@ -7,7 +7,7 @@
 // Respects the same "don't count me" switch as track.js: open the site once with
 // ?notrack=1 in each browser you use (?notrack=0 to undo). Local copies are not counted.
 (function(){
-  const GOATCOUNTER_CODE='YOUR-GOATCOUNTER-CODE';
+  const GOATCOUNTER_CODE='shaykat';
 
   if(!GOATCOUNTER_CODE||GOATCOUNTER_CODE==='YOUR-GOATCOUNTER-CODE')return;
   if(/^(localhost|127\.)/.test(location.hostname)||location.protocol==='file:')return;
