@@ -36,6 +36,14 @@ Keep single files under 100 MB (GitHub's limit); compress large videos before ad
 - **Don't count yourself:** open the site once with `?notrack=1` in each browser you use.
 - Deploy previews write to a separate store, so testing never mixes with real numbers.
 
+## Page-view analytics (GoatCounter)
+
+`analytics.js` loads [GoatCounter](https://www.goatcounter.com) on every public page
+(not `stats.html`). It is free, uses no cookies, and runs outside Netlify, so it keeps
+counting even when Netlify functions are unavailable. Your GoatCounter site code is set
+once at the top of `analytics.js`. It skips local copies, Netlify deploy previews, and
+browsers you opted out with `?notrack=1`.
+
 ## History
 
 See `CHANGELOG.txt`.
